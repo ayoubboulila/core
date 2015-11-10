@@ -108,6 +108,16 @@ Feature: sharing
     And User "user2" should be included in the response
     And User "user3" should not be included in the response
 
+  Scenario: getting share info of a share
+    Given user "user0" exists
+    And user "user1" exists
+    And file "textfile0.txt" from user "user0" is shared with user "user1"
+    And As an "user0"
+    When Getting info of last share
+    Then the OCS status code should be "100"
+    And the HTTP status code should be "200"
+    And User "user1" should be included in the response
+
   Scenario: delete a share
     Given user "user0" exists
     And user "user1" exists

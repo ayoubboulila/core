@@ -744,8 +744,17 @@ class FeatureContext implements Context, SnippetAcceptingContext {
 	 */
 	public function deletingLastShare(){
 		$share_id = $this->lastShareData->data[0]->id;
-		$url = "/apps/files_sharing/api/v{$this->apiVersion}/shares/$share_id";
+		$url = "/apps/files_sharing/api/v{$this->sharingApiVersion}/shares/$share_id";
 		$this->sendingToWith("DELETE", $url, null);
+	}
+
+	/**
+	 * @When /^Getting info of last share$/
+	 */
+	public function gettingInfoOfLastShare(){
+		$share_id = $this->lastShareData->data[0]->id;
+		$url = "/apps/files_sharing/api/v{$this->sharingApiVersion}/shares/$share_id";
+		$this->sendingToWith("GET", $url, null);
 	}
 
 	public static function removeFile($path, $filename){
